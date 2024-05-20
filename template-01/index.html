@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ user.username }} - Sub Info</title>
-    <link href="https://cdn.jsdelivr.net/gh/MuhammadAshouri/marzban-templates@master/template-01/build.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/gh/Platun0v/marzban-templates@master/template-01/build.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/gh/MuhammadAshouri/marzban-templates@master/template-01/qrcode.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/Platun0v/marzban-templates@master/template-01/qrcode.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs-i18n@2.4.0/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.2.0/dist/alpine-clipboard.js"></script>
@@ -22,19 +22,14 @@
         const dataChartColor = dataUsage < 40 ? "bg-green-600" : dataUsage < 80 ? "bg-yellow-600" : "bg-red-500";
         const resetInterval = "{{ user.data_limit_reset_strategy.value }}";
         let expireDateVar = expireDateInit.includes( "∞" ) ? "∞" : localStorage.getItem( "lang" ) == "fa" ? new Date( expireDateInit ).toLocaleString( "fa-IR-u-nu-latn" ).replace( ",", " " ) : expireDateInit;
+        let osLogos = {
+            "IOS": "M8.987 4.5C8.987 1.5 10.487 0 13.487 0C13.487 3 11.987 4.5 8.987 4.5ZM7.66 6.133C7.018 5.838 6.282 5.5 5.323 5.5C3.194 5.5 0 7.629 0 11.887C0 16.145 2.7 22 5.323 22C6.121 22 6.653 21.734 7.186 21.468C7.718 21.202 8.25 20.936 9.049 20.936C9.847 20.936 10.512 21.202 11.178 21.468C11.843 21.734 12.508 22 13.307 22C15.142 22 17.014 19.136 17.973 15.956C17.091 15.636 15.327 13.985 15.327 11.887C15.327 9.181 16.564 7.964 17.182 7.557C16.067 6.186 14.515 5.5 13.307 5.5C12.347 5.5 11.443 5.838 10.653 6.133C10.04 6.361 9.496 6.565 9.049 6.565C8.601 6.565 8.159 6.361 7.66 6.133Z",
+            "Android": "M9.17 1.165C9.07551 0.997296 8.92015 0.872344 8.73609 0.816007C8.55202 0.75967 8.35334 0.776261 8.18117 0.862346C8.009 0.948432 7.87652 1.09742 7.81115 1.27847C7.74578 1.45953 7.75253 1.65878 7.83 1.835L8.667 3.51C8.00017 3.9556 7.42938 4.53028 6.98832 5.20012C6.54726 5.86996 6.24487 6.62137 6.099 7.41L5.99 8H18.01L17.901 7.41C17.7551 6.62137 17.4527 5.86996 17.0117 5.20012C16.5706 4.53028 15.9998 3.9556 15.333 3.51L16.171 1.835C16.258 1.65726 16.2713 1.45232 16.2078 1.26486C16.1444 1.07739 16.0095 0.922596 15.8324 0.834197C15.6553 0.745798 15.4505 0.730964 15.2626 0.792928C15.0746 0.854892 14.9188 0.988631 14.829 1.165L13.992 2.839C13.352 2.61401 12.6784 2.49938 12 2.5C11.3216 2.49938 10.648 2.61401 10.008 2.839L9.17 1.165ZM3.5 9C3.10218 9 2.72064 9.15804 2.43934 9.43934C2.15804 9.72064 2 10.1022 2 10.5V15.5C2 15.8978 2.15804 16.2794 2.43934 16.5607C2.72064 16.842 3.10218 17 3.5 17C3.89782 17 4.27936 16.842 4.56066 16.5607C4.84196 16.2794 5 15.8978 5 15.5V10.5C5 10.1022 4.84196 9.72064 4.56066 9.43934C4.27936 9.15804 3.89782 9 3.5 9ZM20.5 9C20.1022 9 19.7206 9.15804 19.4393 9.43934C19.158 9.72064 19 10.1022 19 10.5V15.5C19 15.8978 19.158 16.2794 19.4393 16.5607C19.7206 16.842 20.1022 17 20.5 17C20.8978 17 21.2794 16.842 21.5607 16.5607C21.842 16.2794 22 15.8978 22 15.5V10.5C22 10.1022 21.842 9.72064 21.5607 9.43934C21.2794 9.15804 20.8978 9 20.5 9ZM18 9H6V17.5C6 17.8978 6.15804 18.2794 6.43934 18.5607C6.72064 18.842 7.10218 19 7.5 19H8V21.5C8 21.8978 8.15804 22.2794 8.43934 22.5607C8.72064 22.842 9.10218 23 9.5 23C9.89782 23 10.2794 22.842 10.5607 22.5607C10.842 22.2794 11 21.8978 11 21.5V19H13V21.5C13 21.8978 13.158 22.2794 13.4393 22.5607C13.7206 22.842 14.1022 23 14.5 23C14.8978 23 15.2794 22.842 15.5607 22.5607C15.842 22.2794 16 21.8978 16 21.5V19H16.5C16.8978 19 17.2794 18.842 17.5607 18.5607C17.842 18.2794 18 17.8978 18 17.5V9Z",
+            "Windows": "M22.25 12.75V23.424L10.75 21.004V12.75H22.25ZM22.25 11.25V0.576L10.75 2.996V11.25H22.25ZM9.25 3.313L1.75 4.89V11.249H9.25V3.313ZM1.75 12.75H9.25V20.688L1.75 19.108V12.75Z",
+            "MacOS": "M8.987 4.5C8.987 1.5 10.487 0 13.487 0C13.487 3 11.987 4.5 8.987 4.5ZM7.66 6.133C7.018 5.838 6.282 5.5 5.323 5.5C3.194 5.5 0 7.629 0 11.887C0 16.145 2.7 22 5.323 22C6.121 22 6.653 21.734 7.186 21.468C7.718 21.202 8.25 20.936 9.049 20.936C9.847 20.936 10.512 21.202 11.178 21.468C11.843 21.734 12.508 22 13.307 22C15.142 22 17.014 19.136 17.973 15.956C17.091 15.636 15.327 13.985 15.327 11.887C15.327 9.181 16.564 7.964 17.182 7.557C16.067 6.186 14.515 5.5 13.307 5.5C12.347 5.5 11.443 5.838 10.653 6.133C10.04 6.361 9.496 6.565 9.049 6.565C8.601 6.565 8.159 6.361 7.66 6.133Z",
+        }
         let appsJson = {
             IOS: {
-                SingBox: {
-                    url: [
-                        {
-                            name: "IOS 15+",
-                            url: "https://apps.apple.com/us/app/sing-box/id6451272673",
-                            best: false,
-                        },
-                    ],
-                    tutorial: "",
-                    autoImport: "sing-box://import-remote-profile?url=",
-                },
                 Streisand: {
                     url: [
                         {
@@ -43,7 +38,7 @@
                             best: false,
                         },
                     ],
-                    tutorial: "https://github.com/MuhammadAshouri/marzban-template-tutorial/raw/master/streisand.MP4",
+                    tutorial: "",
                     autoImport: "streisand://install-config?url=",
                 },
                 FoXray: {
@@ -51,10 +46,10 @@
                         {
                             name: "IOS 16+",
                             url: "https://apps.apple.com/us/app/foxray/id6448898396",
-                            best: false,
+                            best: true,
                         },
                     ],
-                    tutorial: "https://github.com/MuhammadAshouri/marzban-template-tutorial/raw/master/foxray.mp4",
+                    tutorial: "",
                     autoImport: "foxray://install-config?url=",
                 },
                 V2Box: {
@@ -62,10 +57,10 @@
                         {
                             name: "IOS 14+",
                             url: "https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690",
-                            best: true,
+                            best: false,
                         },
                     ],
-                    tutorial: "https://github.com/MuhammadAshouri/marzban-template-tutorial/raw/master/v2box.MP4",
+                    tutorial: "",
                     autoImport: "v2box://install-config?url=",
                 },
                 Shadowrocket: {
@@ -79,96 +74,164 @@
                     tutorial: "",
                     autoImport: "",
                 },
-            },
-            Android: {
                 SingBox: {
                     url: [
                         {
-                            name: "",
-                            url: "https://github.com/SagerNet/sing-box/releases/download/v1.9.0-rc.3/SFA-1.9.0-rc.3-universal.apk",
-                            best: true,
-                        }
+                            name: "IOS 15+",
+                            url: "https://apps.apple.com/us/app/sing-box/id6451272673",
+                            best: false,
+                        },
                     ],
                     tutorial: "",
                     autoImport: "sing-box://import-remote-profile?url=",
+                },
+            },
+            Android: {
+                NekoBox: {
+                    url: [
+                        {
+                            name: "Arm64",
+                            url: "https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.2.9/NB4A-1.2.9-arm64-v8a.apk",
+                            best: true,
+                        },
+                        // {
+                        //     name: "Armeabi",
+                        //     url: "https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.3.1/NB4A-1.3.1-armeabi-v7a.apk",
+                        //     best: false,
+                        // },
+                    ],
+                    tutorial: "",
+                    autoImport: "nekobox://install-config?url=",
                 },
                 v2rayNG: {
                     url: [
                         {
                             name: "GooglePlay",
                             url: "https://play.google.com/store/apps/details?id=com.v2ray.ang",
-                            best: true,
+                            best: false,
                         },
                         {
                             name: "Github",
-                            url: "https://github.com/2dust/v2rayNG/releases/download/1.8.18/v2rayNG_1.8.18.apk",
-                            best: false,
-                        },
-                    ],
-                    tutorial: "https://github.com/MuhammadAshouri/marzban-template-tutorial/raw/master/v2rayNG.mp4",
-                    autoImport: "v2rayng://install-config?url=",
-                },
-                NekoBox: {
-                    url: [
-                        {
-                            name: "Arm64",
-                            url: "https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.3.1/NB4A-1.3.1-arm64-v8a.apk",
-                            best: false,
-                        },
-                        {
-                            name: "Armeabi",
-                            url: "https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.3.1/NB4A-1.3.1-armeabi-v7a.apk",
+                            url: "https://github.com/2dust/v2rayNG/releases/download/1.8.22/v2rayNG_1.8.22.apk",
                             best: false,
                         },
                     ],
                     tutorial: "",
-                    autoImport: "nekobox://install-config?url=",
+                    autoImport: "v2rayng://install-config?url=",
                 },
                 HiddifyNext: {
                     url: [
                         {
                             name: "",
-                            url: "https://github.com/hiddify/hiddify-next/releases/download/v1.0.0/Hiddify-Android-universal.apk",
-                            best: false,
-                        },
-                    ],
-                    tutorial: "https://github.com/MuhammadAshouri/marzban-template-tutorial/raw/master/hiddify.mp4",
-                    autoImport: "",
-                },
-            },
-            Windows: {
-                SingBox: {
-                    url: [
-                        {
-                            name: "",
-                            url: "https://github.com/SagerNet/sing-box/releases/download/v1.9.0-rc.3/sing-box-1.9.0-rc.3-windows-amd64.zip",
+                            url: "https://github.com/hiddify/hiddify-next/releases/download/v1.1.1/Hiddify-Android-universal.apk",
                             best: false,
                         },
                     ],
                     tutorial: "",
-                    autoImport: "",
+                    autoImport: "hiddify://import/",
                 },
+                SingBox: {
+                    url: [
+                        {
+                            name: "",
+                            url: "https://github.com/SagerNet/sing-box/releases/download/v1.8.14/SFA-1.8.14-universal.apk",
+                            best: false,
+                        }
+                    ],
+                    tutorial: "",
+                    autoImport: "sing-box://import-remote-profile?url=",
+                },
+            },
+            Windows: {
                 nekoray: {
                     url: [
                         {
                             name: "",
                             url: "https://github.com/MatsuriDayo/nekoray/releases/download/3.26/nekoray-3.26-2023-12-09-windows64.zip",
-                            best: false,
+                            best: true,
                         },
                     ],
-                    tutorial: "https://github.com/MuhammadAshouri/marzban-template-tutorial/raw/master/nekoray.MP4",
+                    tutorial: "",
                     autoImport: "",
                 },
                 v2rayN: {
                     url: [
                         {
                             name: "",
-                            url: "https://github.com/2dust/v2rayN/releases/download/6.39/zz_v2rayN-With-Core-SelfContained.7z",
-                            best: true,
+                            url: "https://github.com/2dust/v2rayN/releases/download/6.43/zz_v2rayN-With-Core-SelfContained.7z",
+                            best: false,
                         },
                     ],
-                    tutorial: "https://github.com/MuhammadAshouri/marzban-template-tutorial/raw/master/v2rayN.MP4",
+                    tutorial: "",
                     autoImport: "",
+                },
+                HiddifyNext: {
+                    url: [
+                        {
+                            name: "",
+                            url: "https://github.com/hiddify/hiddify-next/releases/download/v1.1.1/Hiddify-Windows-Setup-x64.exe",
+                            best: false,
+                        },
+                    ],
+                    tutorial: "",
+                    autoImport: "hiddify://import/",
+                },
+                SingBox: {
+                    url: [
+                        {
+                            name: "",
+                            url: "https://github.com/SagerNet/sing-box/releases/download/v1.8.14/sing-box-1.8.14-windows-amd64.zip",
+                            best: false,
+                        },
+                    ],
+                    tutorial: "",
+                    autoImport: "",
+                },
+            },
+            MacOS: {
+                Streisand: {
+                    url: [
+                        {
+                            name: "IOS 14+",
+                            url: "https://apps.apple.com/us/app/streisand/id6450534064",
+                            best: false,
+                        },
+                    ],
+                    tutorial: "",
+                    autoImport: "streisand://install-config?url=",
+                },
+                FoXray: {
+                    url: [
+                        {
+                            name: "",
+                            url: "https://apps.apple.com/us/app/foxray/id6448898396",
+                            best: false,
+                        },
+                    ],
+                    tutorial: "",
+                    autoImport: "foxray://install-config?url=",
+                },
+                V2Box: {
+                    url: [
+                        {
+                            name: "",
+                            url: "https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690",
+                            best: false,
+                        },
+                    ],
+                    tutorial: "",
+                    autoImport: "v2box://install-sub?url=",
+                },
+                HiddifyNext: {
+                    url: [
+                        {
+                            name: "",
+                            url: "https://github.com/hiddify/hiddify-next/releases/download/v1.1.1/Hiddify-MacOS.dmg",
+                            best: false,
+                        },
+                    ],
+                    tutorial: "",
+                    autoImport: "hiddify://import/",
                 },
             },
         };
@@ -305,7 +368,7 @@
             <div class="mx-auto max-w-xl">
                 <div class="flex flex-col sm:flex-row space-y-10 sm:space-y-0 sm:divide-x sm:rtl:divide-x-reverse sm:divide-blue-600/50">
                     <div class="basis-1/3 space-y-5 flex flex-col items-center py-3 sm:ltr:pr-9 sm:rtl:pl-9" x-data>
-                        <img src="https://cdn.jsdelivr.net/gh/MuhammadAshouri/marzban-templates@master/template-01/images/marzban.svg" class="w-28" />
+                        <img src="https://cdn.jsdelivr.net/gh/Platun0v/marzban-templates@master/template-01/images/marzban.svg" class="w-28" />
                         <span class="inline-block dark:text-white text-black font-semibold text-lg">{{ user.username }}</span>
                         <span class="px-4 py-2 rounded-full inline-block shadow-md shadow-green-900 font-bold text-gray-200" x-data="{status: '{{ user.status.value }}'}" x-text="[status == 'active' ? $t('active') : status == 'limited' ? $t('limited') : status == 'expired' ? $t('expired') : status == 'on_hold' ? $t('onHold') : $t('disabled')]" :class="[status == 'active' ? 'bg-blue-600' : status == 'limited' ? 'bg-red-600' : status == 'expired' ? 'bg-orange-600' : 'bg-gray-600']"></span>
                         <span class="flex cursor-pointer" onclick="openSettings()">
